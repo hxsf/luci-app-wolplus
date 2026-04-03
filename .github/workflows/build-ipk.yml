@@ -91,7 +91,11 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p sdk/package/${PACKAGE_NAME}
-          rsync -a --delete --exclude='.git' "$GITHUB_WORKSPACE/" "sdk/package/${PACKAGE_NAME}/"
+          rsync -a --delete \
+            --exclude='.git' \
+            --exclude='sdk' \
+            --exclude='artifacts' \
+            "$GITHUB_WORKSPACE/" "sdk/package/${PACKAGE_NAME}/"
 
       - name: Build IPK
         shell: bash
